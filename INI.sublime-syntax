@@ -1,0 +1,82 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: INI
+file_extensions:
+  - ini
+  - cfg
+  - reg
+scope: source.ini
+
+contexts:
+  prototype:
+    - include: comment
+
+  main:
+    - include: section
+    - include: mapping
+
+  comment:
+    - match: ';|#'
+      scope: punctuation.definition.comment.ini
+      push:
+        - meta_scope: comment.line.semicolon.ini
+        - match: $\n?
+          pop: true
+
+  section:
+    - match: '\['
+      scope: punctuation.definition.section.begin.ini
+      push:
+        - meta_content_scope: meta.section.ini entity.name.section.ini
+        - match: \.
+          scope: punctuation.separator.namespace.ini
+        - match: '\]'
+          scope: punctuation.definition.section.end.ini
+          pop: true
+        - match: $\n?
+          pop: true
+
+  mapping:
+    - match: '[\w+-]+(\[\d+\])?'
+      scope: meta.mapping.key.ini string.unquoted.ini
+      push:
+        - match: '=|:'
+          scope: meta.mapping.ini punctuation.separator.mapping.key-value.ini
+          set:
+            - match: '"'
+              scope: punctuation.definition.string.begin.ini
+              push:
+                - meta_include_prototype: false
+                - meta_scope: meta.mapping.value.ini string.quoted.double.ini
+                - match: '"'
+                  scope: punctuation.definition.string.end.ini
+                  pop: true
+                - match: $\n?
+                  pop: true
+            - match: ''''
+              scope: punctuation.definition.string.begin.ini
+              push:
+                - meta_include_prototype: false
+                - meta_scope: meta.mapping.value.ini string.quoted.single.ini
+                - match: ''''
+                  scope: punctuation.definition.string.end.ini
+                  pop: true
+                - match: $\n?
+                  pop: true
+            - match: \b(?i:true|false)\b
+              scope: meta.mapping.value.ini constant.language.ini
+            - match: '[+-]?\d+\.\d*[Ff]?\b'
+              scope: meta.mapping.value.ini constant.numeric.float.ini
+            - match: '[+-]?\d+\b'
+              scope: meta.mapping.value.ini constant.numeric.integer.ini
+            - match: '[^\s]+'
+              scope: meta.mapping.value.ini string.unquoted.ini
+            - match: \s
+              scope: meta.mapping.ini
+            - match: $\n?
+              pop: true
+        - match: \s
+          scope: meta.mapping.ini
+        - match: $\n?
+          pop: true
