@@ -4,7 +4,7 @@
     <key>name</key>
     <string>Symbol List</string>
     <key>scope</key>
-    <string>meta.section.ini</string>
+    <string>entity.name.section.ini</string>
     <key>settings</key>
     <dict>
         <key>showInSymbolList</key>
