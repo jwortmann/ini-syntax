@@ -10,86 +10,116 @@ file_extensions:
 scope: source.ini
 
 contexts:
-  prototype:
-    - match: ';|#'
+
+  main:
+    - include: comment
+    - include: section
+    - include: mapping
+
+  comment:
+    - match: ^;
       scope: punctuation.definition.comment.ini
       push:
         - meta_scope: comment.line.semicolon.ini
         - match: $\n?
           pop: true
-
-  main:
-    - include: section
-    - include: mapping
+    - match: ^#
+      scope: punctuation.definition.comment.ini
+      push:
+        - meta_scope: comment.line.number-sign.ini
+        - match: $\n?
+          pop: true
 
   section:
-    - match: '\['
+    - match: \[
       scope: punctuation.definition.section.begin.ini
       push:
         - meta_scope: meta.section.ini
-        - match: \w
+        - match: \w+
           scope: entity.name.section.ini
         - match: \.
           scope: entity.name.section.ini punctuation.separator.namespace.ini
-        - match: '\]'
+        - match: \]
           scope: punctuation.definition.section.end.ini
           pop: true
         - match: $\n?
           pop: true
 
   mapping:
-    - match: '[\w+-]+(\[\d+\])?'
+    - match: \w
       scope: meta.mapping.key.ini string.unquoted.ini
-    - match: ','
-      scope: meta.mapping.key.ini punctuation.separator.sequence.ini
-    - match: '\s+(?==|:)'
-      scope: meta.mapping.key.ini
-    - match: '=|:'
-      scope: meta.mapping.ini punctuation.separator.mapping.key-value.ini
       push:
-        - meta_content_scope: meta.mapping.value.ini
-        - match: \b(?i:true|false)\b
-          scope: constant.language.ini
-        - match: '[+-]?\b\d+[\.\,]\d*[Ff]?\b'
-          scope: constant.numeric.float.ini
-        - match: '[+-]?\b\d+\b'
-          scope: constant.numeric.integer.ini
-        - match: '"'
-          scope: punctuation.definition.string.begin.ini
-          push:
-            - meta_include_prototype: false
-            - meta_scope: string.quoted.double.ini
-            - include: character-escape
-            - match: '"'
-              scope: punctuation.definition.string.end.ini
-              pop: true
-            - match: $\n?
-              pop: true
-        - match: ''''
-          scope: punctuation.definition.string.begin.ini
-          push:
-            - meta_include_prototype: false
-            - meta_scope: string.quoted.single.ini
-            - include: character-escape
-            - match: ''''
-              scope: punctuation.definition.string.end.ini
-              pop: true
-            - match: $\n?
-              pop: true
-        - match: \S
-          scope: string.unquoted.ini
-          push:
-            - meta_content_scope: string.unquoted.ini
-            - include: character-escape
-            - match: \s
-              pop: true
+        - match: \w+
+          scope: meta.mapping.key.ini string.unquoted.ini
+        - match: (\[)(\d+)(\])
+          scope: meta.mapping.key.ini
+          captures:
+             1: punctuation.section.brackets.begin.ini
+             2: constant.numeric.integer.decimal.ini
+             3: punctuation.section.brackets.end.ini
+        - match: \,
+          scope: meta.mapping.key.ini punctuation.separator.sequence.ini
+
+        - match: '=|:'
+          scope: meta.mapping.ini punctuation.separator.mapping.key-value.ini
+          set:
+            - meta_content_scope: meta.mapping.value.ini
+            - include: number
+            - include: constant
+            - include: string
             - match: $\n?
               pop: true
         - match: $\n?
           pop: true
+        - match: \W
+          scope: meta.mapping.key.ini
+
+  number:
+    - match: '[+-]?\b\d*(\.)\d+(F|f)?\b'
+      scope: constant.numeric.float.decimal.ini
+      captures:
+        1: punctuation.separator.decimal.ini
+        2: storage.type.numeric.ini
+    - match: '[+-]?\b\d+\b'
+      scope: constant.numeric.integer.decimal.ini
+
+  constant:
+    - match: \b(?i:true|false)\b
+      scope: constant.language.ini
+
+  string:
+    - match: \"
+      scope: punctuation.definition.string.begin.ini
+      push:
+        - meta_scope: string.quoted.double.ini
+        - include: character-escape
+        - match: \"
+          scope: punctuation.definition.string.end.ini
+          pop: true
+        - match: $\n?
+          pop: true
+    - match: \'
+      scope: punctuation.definition.string.begin.ini
+      push:
+        - meta_scope: string.quoted.single.ini
+        - include: character-escape
+        - match: \'
+          scope: punctuation.definition.string.end.ini
+          pop: true
+        - match: $\n?
+          pop: true
+    - match: \S
+      scope: string.unquoted.ini
+      push:
+        - meta_content_scope: string.unquoted.ini
+        - include: character-escape
+        - match: \s
+          pop: true
+        - match: $\n?
+          pop: true
 
   character-escape:
-    - match: '\\[0abtrn;#=:]'
+    - match: '\\x\h{4}'
       scope: constant.character.escape.ini
-    - match: '\\x[\dABCDEFabcdef]{4}'
+    - match: '\\(?:[^*\s\w]|[abnrt0])'
       scope: constant.character.escape.ini

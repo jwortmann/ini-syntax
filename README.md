@@ -7,14 +7,14 @@ A package for [Sublime Text 3](https://www.sublimetext.com/) that provides synta
 
 ## Installation
 
-[Download](https://github.com/jwortmann/ini-syntax/archive/master.zip) and unzip the files from this repository and place them into a folder in the packages directory of Sublime Text, e.g. the `Packages/User` package.
+[Download](https://github.com/jwortmann/ini-syntax/archive/master.zip) and unzip the files from this repository and put them into a folder in the packages directory of Sublime Text, e.g. the `Packages/User` package.
 To access the packages directory, choose `Preferences > Browse Packages...` from the Sublime Text menu.
 
 ## Features
 
-You can navigate between sections in opened INI files via Sublime's `Goto Symbol...` feature from the `Goto` menu or with the keyboard shortcut <kbd>Ctrl</kbd>+<kbd>P</kbd>, <kbd>@</kbd>.
+You can navigate between sections in opened INI files via Sublime's `Goto Symbol...` feature from the menu or with the keyboard shortcut <kbd>Ctrl</kbd>+<kbd>R</kbd>.
 
 ## Color Schemes
 
-Following the naming conventions for key-value pairs which are used e.g. by the default JSON syntax definition, the scope `meta.mapping.key.ini string.unquoted.ini` is applied for key names in INI files.
-If you prefer different highlighting colors for key names and values, ensure to use a color scheme that utilizes a rule for `meta.mapping.key` to differentiate between them.
+Following the naming conventions for key-value pairs, the scope `meta.mapping.key.ini string.unquoted.ini` is applied for key names in INI files.
+If you prefer different highlighting colors for key names and values, ensure to use a color scheme which utilizes a rule for `meta.mapping.key string` or `meta.mapping.value string`, to differentiate between them.
