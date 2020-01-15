@@ -49,7 +49,7 @@ contexts:
     - match: \w
       scope: meta.mapping.key.ini string.unquoted.ini
       push:
-        - match: \w+
+        - match: (?:\w|-)+
           scope: meta.mapping.key.ini string.unquoted.ini
         - match: (\[)(\d+)(\])
           scope: meta.mapping.key.ini
@@ -59,7 +59,6 @@ contexts:
              3: punctuation.section.brackets.end.ini
         - match: \,
           scope: meta.mapping.key.ini punctuation.separator.sequence.ini
-
         - match: '=|:'
           scope: meta.mapping.ini punctuation.separator.mapping.key-value.ini
           set:
@@ -75,7 +74,7 @@ contexts:
           scope: meta.mapping.key.ini
 
   number:
-    - match: '[+-]?\b\d*(\.)\d+(F|f)?\b'
+    - match: '[+-]?\b\d*(\.)\d+(?:(?:E|e)[+-]?\d+)?(F|f)?\b'
       scope: constant.numeric.float.decimal.ini
       captures:
         1: punctuation.separator.decimal.ini
