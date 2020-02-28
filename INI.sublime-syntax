@@ -3,9 +3,9 @@
 # See http://www.sublimetext.com/docs/3/syntax.html
 name: INI
 file_extensions:
-  - ini
   - cfg
   - conf
+  - ini
   - reg
 scope: source.ini
 
@@ -43,18 +43,25 @@ contexts:
     - match: \[
       scope: punctuation.definition.section.begin.ini
       push:
-        - meta_scope: meta.section.ini
-        - match: \.
-          scope: entity.name.section.ini punctuation.separator.namespace.ini
-        - match: \\
-          scope: entity.name.section.ini punctuation.separator.backslash.ini
-        - match: \]
-          scope: punctuation.definition.section.end.ini
-          pop: true
-        - match: \S
-          scope: entity.name.section.ini
-        - match: $\n?
-          pop: true
+        - match: \-
+          scope: keyword.operator.arithmetic.ini
+          set: section-name
+        - match: ''
+          set: section-name
+
+  section-name:
+    - meta_scope: meta.section.ini
+    - match: \.
+      scope: entity.name.section.ini punctuation.separator.namespace.ini
+    - match: \\
+      scope: entity.name.section.ini punctuation.separator.backslash.ini
+    - match: \]
+      scope: punctuation.definition.section.end.ini
+      pop: true
+    - match: \S
+      scope: entity.name.section.ini
+    - match: $\n?
+      pop: true
 
   mapping:
     - match: (?=\S)
