@@ -74,11 +74,16 @@ contexts:
               scope: punctuation.separator.mapping.key-value.ini
               set:
                 - meta_content_scope: meta.mapping.value.ini
-                - include: number
-                - include: constant
-                - include: string
-                - match: $\n?
-                  pop: true
+                - match: \-(?=$)
+                  scope: keyword.operator.arithmetic.ini
+                - match: ''
+                  set:
+                    - meta_content_scope: meta.mapping.value.ini
+                    - include: number
+                    - include: constant
+                    - include: string
+                    - match: $\n?
+                      pop: true
         - match: '(\[)(\d+)(\])'
           captures:
              1: punctuation.section.brackets.begin.ini
