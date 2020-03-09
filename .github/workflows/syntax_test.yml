@@ -2,6 +2,9 @@ name: Syntax Test
 
 on: [push, pull_request]
 
+env:
+  PACKAGE: INI Syntax
+
 jobs:
   windows:
     runs-on: windows-latest
