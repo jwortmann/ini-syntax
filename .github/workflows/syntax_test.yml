@@ -1,4 +1,4 @@
-name: Syntax Test
+name: build
 
 on: [push, pull_request]
 
