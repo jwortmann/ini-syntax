@@ -1,0 +1,20 @@
+name: syntax tests
+
+on: [push, pull_request]
+
+env:
+  PACKAGE: INI Syntax
+  SUBLIME_TEXT_VERSION: 3
+  SUBLIME_TEXT_ARCH: x64
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download PowerShell script
+        run: Invoke-WebRequest -Uri "https://raw.githubusercontent.com/SublimeText/UnitTesting/master/sbin/github.ps1" -OutFile "github.ps1"
+      - name: Set up Sublime Text and run syntax tests
+        run: |
+          ./github.ps1 "bootstrap" -verbose
+          ./github.ps1 "run_syntax_tests" -verbose
