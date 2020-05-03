@@ -8,8 +8,8 @@ A package for [Sublime Text 3](https://www.sublimetext.com/) that provides synta
 
 ## Installation
 
-[Download](https://github.com/jwortmann/ini-syntax/archive/master.zip) and unzip the files from this repository and put them into a folder in the packages directory of Sublime Text, e.g. the `Packages/User` package.
-To access the packages directory, choose `Preferences > Browse Packages...` from the Sublime Text menu.
+1. Run `Package Control: Add Repository` from the command palette and paste `https://raw.githubusercontent.com/jwortmann/ini-syntax/master/packages.json`
+2. Run `Package Control: Install Package` and search for `INI Syntax`
 
 ## Features
 
