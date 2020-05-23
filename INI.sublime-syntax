@@ -9,6 +9,9 @@ file_extensions:
   - reg
 scope: source.ini
 
+variables:
+  separator: '[=:]'
+
 contexts:
 
   prototype:
@@ -32,7 +35,7 @@ contexts:
         - meta_scope: comment.line.semicolon.ini
         - match: $\n?
           pop: true
-    - match: ^#
+    - match: '^#|(?<=\s)#'
       scope: punctuation.definition.comment.ini
       push:
         - meta_scope: comment.line.number-sign.ini
@@ -55,6 +58,8 @@ contexts:
       scope: entity.name.section.ini punctuation.separator.namespace.ini
     - match: \\
       scope: entity.name.section.ini punctuation.separator.backslash.ini
+    - match: ':'
+      scope: entity.name.section.ini punctuation.separator.colon.ini
     - match: \]
       scope: punctuation.definition.section.end.ini
       pop: true
@@ -67,20 +72,26 @@ contexts:
     - match: (?=\S)
       push:
         - meta_content_scope: meta.mapping.key.ini
-        - match: '(?=[=:])'
+        - match: '(?={{separator}})'
           set:
             - meta_content_scope: meta.mapping.ini
-            - match: '[=:]'
+            - match: '{{separator}}'
               scope: punctuation.separator.mapping.key-value.ini
               set:
                 - meta_content_scope: meta.mapping.value.ini
                 - match: \-(?=$)
                   scope: keyword.operator.arithmetic.ini
+                - match: \s*$\n
+                  set: maybe-value
                 - match: ''
                   set:
-                    - meta_content_scope: meta.mapping.value.ini
+                    - meta_scope: meta.mapping.value.ini
                     - include: number
                     - include: constant
+                    - match: (,)\s*$\n?
+                      captures:
+                        1: punctuation.separator.sequence.ini
+                      set: maybe-value
                     - include: string
                     - match: $\n?
                       pop: true
@@ -94,6 +105,19 @@ contexts:
         - include: string
         - match: $\n?
           pop: true
+
+  maybe-value:
+    - meta_content_scope: meta.mapping.value.ini
+    - match: '^(?=\S)'
+      pop: true
+    - match: '(?=.+{{separator}})'
+      pop: true
+    - include: number
+    - include: constant
+    - match: (,)\s*$\n?
+      captures:
+        1: punctuation.separator.sequence.ini
+    - include: string
 
   number:
     - match: '[+-]?\b\d*(\.)\d+(?:(?:E|e)[+-]?\d+)?(F|f)?\b'
@@ -118,7 +142,10 @@ contexts:
       set:
         - meta_content_scope: meta.mapping.value.ini
         - include: hex-number
+        - match: .
+          scope: invalid.illegal.ini
         - match: $\n?
+          scope: meta.mapping.value.ini
           pop: true
     - match: '\b(hex(?:\([01234578ab]\))?)(:)'
       captures:
@@ -129,9 +156,13 @@ contexts:
         - include: hex-number
         - match: \,
           scope: punctuation.separator.sequence.ini
-        - match: \\
-          scope: constant.character.line-continuation.ini
-        - match: '(?<!\\)\n'
+        - match: (\\)\s*$\n?
+          captures:
+            1: constant.character.line-continuation.ini
+        - match: .
+          scope: invalid.illegal.ini
+        - match: $\n
+          scope: meta.mapping.value.ini
           pop: true
 
   string:
