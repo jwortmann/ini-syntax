@@ -4,7 +4,7 @@
     <key>name</key>
     <string>Comments</string>
     <key>scope</key>
-    <string>source.ini</string>
+    <string>source.ini, source.reg</string>
     <key>settings</key>
     <dict>
         <key>shellVariables</key>
