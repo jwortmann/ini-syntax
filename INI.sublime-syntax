@@ -167,7 +167,7 @@ contexts:
               scope: punctuation.separator.sequence.ini
             - match: (\\)\s*$\n?
               captures:
-                1: constant.character.line-continuation.ini
+                1: punctuation.separator.continuation.line.ini
             - match: $\n
               scope: meta.mapping.value.ini
               pop: true
