@@ -5,6 +5,7 @@ name: INI
 file_extensions:
   - cfg
   - conf
+  - inf
   - ini
   - reg
 scope: source.ini
