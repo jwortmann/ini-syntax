@@ -45,7 +45,7 @@ contexts:
 
   section:
     - match: \[
-      scope: punctuation.definition.section.begin.ini
+      scope: meta.section.ini punctuation.definition.section.begin.ini
       push:
         - match: \-
           scope: keyword.operator.arithmetic.ini
