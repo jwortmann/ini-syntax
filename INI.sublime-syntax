@@ -64,7 +64,7 @@ contexts:
     - match: \]
       scope: punctuation.definition.section.end.ini
       pop: true
-    - match: \S
+    - match: .
       scope: entity.name.section.ini
     - match: $\n?
       pop: true
@@ -141,7 +141,7 @@ contexts:
       set:
         - meta_content_scope: meta.mapping.value.ini
         - match: ':'
-          scope: punctuation.separator.mapping.key-value.ini
+          scope: punctuation.separator.colon.ini
           set:
             - meta_content_scope: meta.mapping.value.ini
             - include: hex-number
@@ -160,7 +160,7 @@ contexts:
       set:
         - meta_content_scope: meta.mapping.value.ini
         - match: ':'
-          scope: punctuation.separator.mapping.key-value.ini
+          scope: punctuation.separator.colon.ini
           set:
             - meta_content_scope: meta.mapping.value.ini
             - include: hex-number
