@@ -3,6 +3,7 @@
 # See http://www.sublimetext.com/docs/3/syntax.html
 name: INI
 scope: source.ini
+version: 2
 
 file_extensions:
   - cfg
@@ -68,29 +69,26 @@ contexts:
     - match: (?=\S)
       push:
         - meta_content_scope: meta.mapping.key.ini
-        - match: (?={{separator}})
+        - match: '{{separator}}'
+          scope: meta.mapping.ini punctuation.separator.mapping.key-value.ini
           set:
-            - meta_content_scope: meta.mapping.ini
-            - match: '{{separator}}'
-              scope: punctuation.separator.mapping.key-value.ini
+            - meta_content_scope: meta.mapping.value.ini
+            - match: \-(?=\s*($|#))
+              scope: meta.mapping.value.ini keyword.operator.arithmetic.ini
+              pop: true
+            - match: \s*\n
+              set: maybe-value
+            - match: ''
               set:
-                - meta_content_scope: meta.mapping.value.ini
-                - match: \-(?=\s*($|#))
-                  scope: meta.mapping.value.ini keyword.operator.arithmetic.ini
-                  pop: true
-                - match: \s*\n
+                - meta_scope: meta.mapping.value.ini
+                - match: (,)\s*$\n?
+                  captures:
+                    1: punctuation.separator.sequence.ini
                   set: maybe-value
-                - match: ''
-                  set:
-                    - meta_scope: meta.mapping.value.ini
-                    - match: (,)\s*$\n?
-                      captures:
-                        1: punctuation.separator.sequence.ini
-                      set: maybe-value
-                    - include: constant
-                    - include: number
-                    - include: string
-                    - include: eol-pop
+                - include: constant
+                - include: number
+                - include: string
+                - include: eol-pop
         - match: (\[)(\d+)(\])
           captures:
              1: punctuation.section.brackets.begin.ini
@@ -125,7 +123,7 @@ contexts:
         - match: ':'
           scope: punctuation.separator.colon.ini
           set:
-            - meta_content_scope: meta.mapping.value.ini
+            - meta_scope: meta.mapping.value.ini
             - include: hex-number
             - include: eol-pop
             - match: .
@@ -140,7 +138,7 @@ contexts:
         - match: ':'
           scope: punctuation.separator.colon.ini
           set:
-            - meta_content_scope: meta.mapping.value.ini
+            - meta_scope: meta.mapping.value.ini
             - include: hex-number
             - include: eol-pop
             - match: \,
@@ -148,6 +146,9 @@ contexts:
             - match: (\\)\s*$\n?
               captures:
                 1: punctuation.separator.continuation.line.ini
+              push:
+                - match: ^
+                  pop: true
             - match: ^\s+
             - match: .
               scope: invalid.illegal.ini
@@ -196,11 +197,9 @@ contexts:
           pop: true
 
   character-escape:
-    - match: \\x\h{4}
-      scope: constant.character.escape.ini
-    - match: \\(?:[^*\s\w]|[abnrt0])
+    - match: \\(?:[^*\s\w]|[abnrt0]|x\h{4})
       scope: constant.character.escape.ini
 
   eol-pop:
-    - match: \n|(?=\s+#)
+    - match: $|(?=\s+#)
       pop: true
