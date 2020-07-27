@@ -117,19 +117,6 @@ contexts:
         1: punctuation.separator.sequence.ini
     - include: string
 
-  number:
-    - match: '[-+]?\b\d*(\.)\d+(?:(?:E|e)[-+]?\d+)?(F|f)?\b'
-      scope: constant.numeric.float.decimal.ini
-      captures:
-        1: punctuation.separator.decimal.ini
-        2: storage.type.numeric.ini
-    - match: '[-+]?\b\d+\b'
-      scope: constant.numeric.integer.decimal.ini
-
-  hex-number:
-    - match: \b\h+\b
-      scope: constant.numeric.integer.hexadecimal.ini
-
   constant:
     - match: \b(?i:true|false)\b
       scope: constant.language.ini
@@ -174,6 +161,19 @@ contexts:
               scope: invalid.illegal.ini
         - match: '[^()01234578ab]'
           scope: invalid.illegal.ini
+
+  hex-number:
+    - match: \b\h+\b
+      scope: constant.numeric.integer.hexadecimal.ini
+
+  number:
+    - match: '[-+]?\b\d*(\.)\d+(?:(?:E|e)[-+]?\d+)?(F|f)?\b'
+      scope: constant.numeric.float.decimal.ini
+      captures:
+        1: punctuation.separator.decimal.ini
+        2: storage.type.numeric.ini
+    - match: '[-+]?\b\d+\b'
+      scope: constant.numeric.integer.decimal.ini
 
   string:
     - match: \"
