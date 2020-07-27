@@ -121,12 +121,12 @@ contexts:
     - include: string
 
   number:
-    - match: '[+-]?\b\d*(\.)\d+(?:(?:E|e)[+-]?\d+)?(F|f)?\b'
+    - match: '[-+]?\b\d*(\.)\d+(?:(?:E|e)[-+]?\d+)?(F|f)?\b'
       scope: constant.numeric.float.decimal.ini
       captures:
         1: punctuation.separator.decimal.ini
         2: storage.type.numeric.ini
-    - match: '[+-]?\b\d+\b'
+    - match: '[-+]?\b\d+\b'
       scope: constant.numeric.integer.decimal.ini
 
   hex-number:
