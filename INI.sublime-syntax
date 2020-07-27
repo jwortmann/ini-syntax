@@ -2,13 +2,14 @@
 ---
 # See http://www.sublimetext.com/docs/3/syntax.html
 name: INI
+scope: source.ini
+
 file_extensions:
   - cfg
   - conf
   - inf
   - ini
   - reg
-scope: source.ini
 
 variables:
   separator: '[=:]'
