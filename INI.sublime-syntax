@@ -75,9 +75,10 @@ contexts:
               scope: punctuation.separator.mapping.key-value.ini
               set:
                 - meta_content_scope: meta.mapping.value.ini
-                - match: \-(?=$)
-                  scope: keyword.operator.arithmetic.ini
-                - match: \s*$\n
+                - match: \-(?=\s*($|#))
+                  scope: meta.mapping.value.ini keyword.operator.arithmetic.ini
+                  pop: true
+                - match: \s*\n
                   set: maybe-value
                 - match: ''
                   set:
