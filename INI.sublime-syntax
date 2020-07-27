@@ -34,13 +34,13 @@ contexts:
       scope: punctuation.definition.comment.ini
       push:
         - meta_scope: comment.line.semicolon.ini
-        - match: $\n?
+        - match: \n
           pop: true
     - match: ^#|(?<=\s)#
       scope: punctuation.definition.comment.ini
       push:
         - meta_scope: comment.line.number-sign.ini
-        - match: $\n?
+        - match: \n
           pop: true
 
   section:
@@ -66,7 +66,7 @@ contexts:
       pop: true
     - match: .
       scope: entity.name.section.ini
-    - match: $\n?
+    - match: \n
       pop: true
 
   mapping:
@@ -94,7 +94,7 @@ contexts:
                         1: punctuation.separator.sequence.ini
                       set: maybe-value
                     - include: string
-                    - match: $\n?
+                    - match: \n
                       pop: true
         - match: (\[)(\d+)(\])
           captures:
@@ -104,7 +104,7 @@ contexts:
         - match: \,
           scope: punctuation.separator.sequence.ini
         - include: string
-        - match: $\n?
+        - match: \n
           pop: true
 
   maybe-value:
@@ -145,12 +145,12 @@ contexts:
           set:
             - meta_content_scope: meta.mapping.value.ini
             - include: hex-number
-            - match: $\n?
+            - match: \n
               scope: meta.mapping.value.ini
               pop: true
             - match: .
               scope: invalid.illegal.ini
-        - match: $\n
+        - match: \n
           scope: meta.mapping.value.ini
           pop: true
         - match: .
@@ -169,7 +169,7 @@ contexts:
             - match: (\\)\s*$\n?
               captures:
                 1: punctuation.separator.continuation.line.ini
-            - match: $\n
+            - match: \n
               scope: meta.mapping.value.ini
               pop: true
             - match: ^\s+
@@ -187,7 +187,7 @@ contexts:
         - match: \"
           scope: punctuation.definition.string.end.ini
           pop: true
-        - match: $\n?
+        - match: \n
           pop: true
     - match: \'
       scope: punctuation.definition.string.begin.ini
@@ -197,7 +197,7 @@ contexts:
         - match: \'
           scope: punctuation.definition.string.end.ini
           pop: true
-        - match: $\n?
+        - match: \n
           pop: true
     - match: (?=\S)
       push:
@@ -205,7 +205,7 @@ contexts:
         - include: character-escape
         - match: (?=[\s=:,\[])
           pop: true
-        - match: $\n?
+        - match: \n
           pop: true
 
   character-escape:
