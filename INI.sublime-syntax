@@ -36,7 +36,7 @@ contexts:
         - meta_scope: comment.line.semicolon.ini
         - match: $\n?
           pop: true
-    - match: '^#|(?<=\s)#'
+    - match: ^#|(?<=\s)#
       scope: punctuation.definition.comment.ini
       push:
         - meta_scope: comment.line.number-sign.ini
@@ -73,7 +73,7 @@ contexts:
     - match: (?=\S)
       push:
         - meta_content_scope: meta.mapping.key.ini
-        - match: '(?={{separator}})'
+        - match: (?={{separator}})
           set:
             - meta_content_scope: meta.mapping.ini
             - match: '{{separator}}'
@@ -96,7 +96,7 @@ contexts:
                     - include: string
                     - match: $\n?
                       pop: true
-        - match: '(\[)(\d+)(\])'
+        - match: (\[)(\d+)(\])
           captures:
              1: punctuation.section.brackets.begin.ini
              2: constant.numeric.integer.decimal.ini
@@ -109,9 +109,9 @@ contexts:
 
   maybe-value:
     - meta_content_scope: meta.mapping.value.ini
-    - match: '^(?=\S)'
+    - match: ^(?=\S)
       pop: true
-    - match: '(?=.+{{separator}})'
+    - match: (?=.+{{separator}})
       pop: true
     - include: number
     - include: constant
@@ -136,7 +136,7 @@ contexts:
   constant:
     - match: \b(?i:true|false)\b
       scope: constant.language.ini
-    - match: '\bdword\b'
+    - match: \bdword\b
       scope: storage.type.dword.ini
       set:
         - meta_content_scope: meta.mapping.value.ini
@@ -155,7 +155,7 @@ contexts:
           pop: true
         - match: .
           scope: invalid.illegal.ini
-    - match: '\b(hex\b(?:\([01234578ab]\))?)'
+    - match: \b(hex\b(?:\([01234578ab]\))?)
       scope: storage.type.hex.ini
       set:
         - meta_content_scope: meta.mapping.value.ini
@@ -199,17 +199,17 @@ contexts:
           pop: true
         - match: $\n?
           pop: true
-    - match: '(?=\S)'
+    - match: (?=\S)
       push:
         - meta_content_scope: string.unquoted.ini
         - include: character-escape
-        - match: '(?=[\s=:,\[])'
+        - match: (?=[\s=:,\[])
           pop: true
         - match: $\n?
           pop: true
 
   character-escape:
-    - match: '\\x\h{4}'
+    - match: \\x\h{4}
       scope: constant.character.escape.ini
-    - match: '\\(?:[^*\s\w]|[abnrt0])'
+    - match: \\(?:[^*\s\w]|[abnrt0])
       scope: constant.character.escape.ini
