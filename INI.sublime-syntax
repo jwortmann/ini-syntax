@@ -45,27 +45,24 @@ contexts:
 
   section:
     - match: \[
-      scope: meta.section.ini punctuation.definition.section.begin.ini
+      scope: punctuation.definition.section.begin.ini
       push:
-        - match: \-
+        - meta_scope: meta.section.ini
+        - match: \-?
           scope: keyword.operator.arithmetic.ini
-          set: section-name
-        - match: ''
           set: section-name
 
   section-name:
-    - meta_scope: meta.section.ini
-    - match: \.
-      scope: entity.name.section.ini punctuation.separator.namespace.ini
-    - match: \\
-      scope: entity.name.section.ini punctuation.separator.backslash.ini
-    - match: ':'
-      scope: entity.name.section.ini punctuation.separator.colon.ini
+    - meta_content_scope: meta.section.ini entity.name.section.ini
     - match: \]
-      scope: punctuation.definition.section.end.ini
+      scope: meta.section.ini punctuation.definition.section.end.ini
       pop: true
-    - match: .
-      scope: entity.name.section.ini
+    - match: \.
+      scope: punctuation.separator.namespace.ini
+    - match: \\
+      scope: punctuation.separator.backslash.ini
+    - match: ':'
+      scope: punctuation.separator.colon.ini
     - match: \n
       pop: true
 
