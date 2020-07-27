@@ -202,8 +202,6 @@ contexts:
         - include: character-escape
         - match: (?=[\s=:,\[])
           pop: true
-        - match: \n
-          pop: true
 
   character-escape:
     - match: \\x\h{4}
