@@ -15,9 +15,6 @@ variables:
 
 contexts:
 
-  prototype:
-    - include: comment
-
   main:
     - match: ^(?:REGDIT4|Windows Registry Editor Version 5\.00)\b
       scope: meta.directive.registry.ini keyword.other.directive.registry.ini
@@ -26,17 +23,18 @@ contexts:
       set: content
 
   content:
+    - include: comment
     - include: section
     - include: mapping
 
   comment:
-    - match: ^;
+    - match: ;
       scope: punctuation.definition.comment.ini
       push:
         - meta_scope: comment.line.semicolon.ini
         - match: \n
           pop: true
-    - match: ^#|(?<=\s)#
+    - match: \#
       scope: punctuation.definition.comment.ini
       push:
         - meta_scope: comment.line.number-sign.ini
@@ -63,8 +61,7 @@ contexts:
       scope: punctuation.separator.backslash.ini
     - match: ':'
       scope: punctuation.separator.colon.ini
-    - match: \n
-      pop: true
+    - include: eol-pop
 
   mapping:
     - match: (?=\S)
@@ -84,15 +81,14 @@ contexts:
                 - match: ''
                   set:
                     - meta_scope: meta.mapping.value.ini
-                    - include: number
-                    - include: constant
                     - match: (,)\s*$\n?
                       captures:
                         1: punctuation.separator.sequence.ini
                       set: maybe-value
+                    - include: constant
+                    - include: number
                     - include: string
-                    - match: \n
-                      pop: true
+                    - include: eol-pop
         - match: (\[)(\d+)(\])
           captures:
              1: punctuation.section.brackets.begin.ini
@@ -101,20 +97,20 @@ contexts:
         - match: \,
           scope: punctuation.separator.sequence.ini
         - include: string
-        - match: \n
-          pop: true
+        - include: eol-pop
 
   maybe-value:
     - meta_content_scope: meta.mapping.value.ini
+    - include: comment
     - match: ^(?=\S)
       pop: true
     - match: (?=.+{{separator}})
       pop: true
-    - include: number
-    - include: constant
     - match: (,)\s*$\n?
       captures:
         1: punctuation.separator.sequence.ini
+    - include: constant
+    - include: number
     - include: string
 
   constant:
@@ -129,14 +125,10 @@ contexts:
           set:
             - meta_content_scope: meta.mapping.value.ini
             - include: hex-number
-            - match: \n
-              scope: meta.mapping.value.ini
-              pop: true
+            - include: eol-pop
             - match: .
               scope: invalid.illegal.ini
-        - match: \n
-          scope: meta.mapping.value.ini
-          pop: true
+        - include: eol-pop
         - match: .
           scope: invalid.illegal.ini
     - match: \b(hex\b(?:\([01234578ab]\))?)
@@ -148,14 +140,12 @@ contexts:
           set:
             - meta_content_scope: meta.mapping.value.ini
             - include: hex-number
+            - include: eol-pop
             - match: \,
               scope: punctuation.separator.sequence.ini
             - match: (\\)\s*$\n?
               captures:
                 1: punctuation.separator.continuation.line.ini
-            - match: \n
-              scope: meta.mapping.value.ini
-              pop: true
             - match: ^\s+
             - match: .
               scope: invalid.illegal.ini
@@ -208,3 +198,7 @@ contexts:
       scope: constant.character.escape.ini
     - match: \\(?:[^*\s\w]|[abnrt0])
       scope: constant.character.escape.ini
+
+  eol-pop:
+    - match: \n|(?=\s+#)
+      pop: true
