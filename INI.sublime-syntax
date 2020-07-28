@@ -143,11 +143,12 @@ contexts:
             - include: eol-pop
             - match: \,
               scope: punctuation.separator.sequence.ini
-            - match: (\\)\s*$\n?
+            - match: (\\)\s*$
               captures:
                 1: punctuation.separator.continuation.line.ini
               push:
-                - match: ^
+                - include: comment
+                - match: (?=\S)
                   pop: true
             - match: ^\s+
             - match: .
