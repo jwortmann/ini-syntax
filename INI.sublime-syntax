@@ -3,7 +3,6 @@
 # See http://www.sublimetext.com/docs/3/syntax.html
 name: INI
 scope: source.ini
-version: 2
 
 file_extensions:
   - cfg
@@ -69,37 +68,47 @@ contexts:
     - match: (?=\S)
       push:
         - meta_content_scope: meta.mapping.key.ini
-        - match: '{{separator}}'
-          scope: meta.mapping.ini punctuation.separator.mapping.key-value.ini
+        - match: (?=\s*{{separator}})
           set:
-            - meta_content_scope: meta.mapping.value.ini
-            - match: \-(?=\s*($|#))
-              scope: meta.mapping.value.ini keyword.operator.arithmetic.ini
-              pop: true
-            - match: \s*\n
-              set: maybe-value
-            - match: ''
-              set:
-                - meta_scope: meta.mapping.value.ini
-                - match: (,)\s*$\n?
-                  captures:
-                    1: punctuation.separator.sequence.ini
-                  set: maybe-value
-                - include: constant
-                - include: number
-                - include: string
-                - include: eol-pop
+            - mapping-value
+            - mapping-separator
         - match: (\[)(\d+)(\])
           captures:
-             1: punctuation.section.brackets.begin.ini
-             2: constant.numeric.integer.decimal.ini
-             3: punctuation.section.brackets.end.ini
+            1: punctuation.section.brackets.begin.ini
+            2: constant.numeric.integer.decimal.ini
+            3: punctuation.section.brackets.end.ini
         - match: \,
           scope: punctuation.separator.sequence.ini
         - include: string
         - include: eol-pop
 
-  maybe-value:
+  mapping-separator:
+    - match: '{{separator}}'
+      scope: punctuation.separator.mapping.key-value.ini
+      pop: true
+
+  mapping-value:
+    - meta_content_scope: meta.mapping.ini
+    - match: \-(?=\s*($|#))
+      scope: meta.mapping.value.ini keyword.operator.arithmetic.ini
+      pop: true
+    - match: (?=\S)
+      set: maybe-value-firstline
+    - match: \n
+      set: maybe-value-multiline
+
+  maybe-value-firstline:
+    - meta_scope: meta.mapping.value.ini
+    - match: (,)\s*$\n?
+      captures:
+        1: punctuation.separator.sequence.ini
+      set: maybe-value-multiline
+    - include: constant
+    - include: number
+    - include: string
+    - include: eol-pop
+
+  maybe-value-multiline:
     - meta_content_scope: meta.mapping.value.ini
     - include: comment
     - match: ^(?=\S)
