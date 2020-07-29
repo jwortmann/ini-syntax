@@ -140,7 +140,7 @@ contexts:
           set:
             - include: hex-number
             - include: eol-pop
-            - match: .
+            - match: \S
               scope: invalid.illegal.ini
         - include: eol-pop
         - match: \S
