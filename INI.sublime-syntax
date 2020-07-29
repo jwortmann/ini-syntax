@@ -143,7 +143,7 @@ contexts:
             - match: .
               scope: invalid.illegal.ini
         - include: eol-pop
-        - match: .
+        - match: \S
           scope: invalid.illegal.ini
     - match: \b(hex\b(?:\([01234578ab]\))?)
       scope: storage.type.hex.ini
@@ -163,9 +163,9 @@ contexts:
                 - match: (?=\S)
                   pop: true
             - match: ^\s+
-            - match: .
+            - match: \S
               scope: invalid.illegal.ini
-        - match: '[^()01234578ab]'
+        - match: '[^()01234578ab\s]'
           scope: invalid.illegal.ini
 
   hex-number:
