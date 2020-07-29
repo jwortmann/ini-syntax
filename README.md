@@ -4,7 +4,7 @@
 [![Version](https://img.shields.io/github/v/tag/jwortmann/ini-syntax?label=version)](https://github.com/jwortmann/ini-syntax/tags)
 [![GitHub Actions](https://github.com/jwortmann/ini-syntax/workflows/syntax%20tests/badge.svg)](https://github.com/jwortmann/ini-syntax/actions)
 
-A package for [Sublime Text 3](https://www.sublimetext.com/) that provides syntax highlighting for INI files and Windows Registry (.reg) files.
+A package for [Sublime Text](https://www.sublimetext.com/) that provides syntax highlighting for INI files and Windows Registry (.reg) files.
 
 ## Installation
 
@@ -17,5 +17,6 @@ You can navigate between sections in opened INI files via Sublime's `Goto Symbol
 
 ## Color Schemes
 
-Following the naming conventions for key-value pairs, the scope `meta.mapping.key.ini string.unquoted.ini` is applied for key names in INI files.
-If you prefer different highlighting colors for key names and values, ensure to use a color scheme which utilizes a rule for `meta.mapping.key string` or `meta.mapping.value string`, to differentiate between them.
+Following the naming conventions for key-value pairs, the scopes `meta.mapping.key.ini string` and `meta.mapping.value.ini string` are applied for keys and string values respectively.
+If you prefer different highlighting colors for key names and values, ensure to use a color scheme which targets one of these scopes to distinguish between them.
+You can easily add such a rule as a customization to your color scheme, as described in the [official documentation](https://www.sublimetext.com/docs/color_schemes.html#customization).
