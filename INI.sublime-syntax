@@ -93,12 +93,20 @@ contexts:
       scope: meta.mapping.value.ini keyword.operator.arithmetic.ini
       pop: true
     - match: (?=\S)
-      set: maybe-value-firstline
+      set:
+        - mapping-value-meta
+        - maybe-value-firstline
     - match: \n
-      set: maybe-value-multiline
+      set:
+        - mapping-value-meta
+        - maybe-value-multiline
+
+  mapping-value-meta:
+    - meta_scope: meta.mapping.value.ini
+    - match: ''
+      pop: true
 
   maybe-value-firstline:
-    - meta_scope: meta.mapping.value.ini
     - match: (,)\s*$\n?
       captures:
         1: punctuation.separator.sequence.ini
@@ -109,7 +117,6 @@ contexts:
     - include: eol-pop
 
   maybe-value-multiline:
-    - meta_content_scope: meta.mapping.value.ini
     - include: comment
     - match: ^(?=\S)
       pop: true
@@ -128,11 +135,9 @@ contexts:
     - match: \bdword\b
       scope: storage.type.dword.ini
       set:
-        - meta_content_scope: meta.mapping.value.ini
         - match: ':'
           scope: punctuation.separator.colon.ini
           set:
-            - meta_scope: meta.mapping.value.ini
             - include: hex-number
             - include: eol-pop
             - match: .
@@ -143,11 +148,9 @@ contexts:
     - match: \b(hex\b(?:\([01234578ab]\))?)
       scope: storage.type.hex.ini
       set:
-        - meta_content_scope: meta.mapping.value.ini
         - match: ':'
           scope: punctuation.separator.colon.ini
           set:
-            - meta_scope: meta.mapping.value.ini
             - include: hex-number
             - include: eol-pop
             - match: \,
