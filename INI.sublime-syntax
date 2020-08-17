@@ -9,7 +9,6 @@ file_extensions:
   - conf
   - inf
   - ini
-  - reg
 
 variables:
   separator: '[=:]'
@@ -17,13 +16,6 @@ variables:
 contexts:
 
   main:
-    - match: ^(?:REGEDIT4|Windows Registry Editor Version 5\.00)\b
-      scope: meta.directive.registry.ini keyword.other.directive.registry.ini
-      set: content
-    - match: ''
-      set: content
-
-  content:
     - include: comment
     - include: section
     - include: mapping
