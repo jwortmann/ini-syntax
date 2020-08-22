@@ -20,7 +20,7 @@ class OpenContextRegKeyCommand(sublime_plugin.TextCommand):
         return sublime.platform() == "windows"
 
     def is_visible(self, event):
-        return self.is_enabled() and self.view.match_selector(self.view.window_to_text((event["x"], event["y"])), "source.reg entity.name.section")
+        return self.is_enabled(event) and self.view.match_selector(self.view.window_to_text((event["x"], event["y"])), "source.reg entity.name.section")
 
     def want_event(self):
         return True
