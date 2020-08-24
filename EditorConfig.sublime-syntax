@@ -76,7 +76,7 @@ contexts:
         - include: eol-pop
 
   mapping-value:
-    - match: \b(?:tab|space|lf|cr(?:lf)?|latin1|utf-8(?:-bom)?|utf-16[bl]e)\b
+    - match: \b(?i:tab|space|lf|cr(?:lf)?|latin1|utf-8(?:-bom)?|utf-16[bl]e)\b
       scope: support.constant.ini
     - match: \b(?i:true|false)\b
       scope: constant.language.ini
