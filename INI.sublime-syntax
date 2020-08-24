@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-# See http://www.sublimetext.com/docs/3/syntax.html
+# http://www.sublimetext.com/docs/syntax.html
 name: INI
 scope: source.ini
 
@@ -9,6 +9,9 @@ file_extensions:
   - conf
   - inf
   - ini
+  - lng
+  - url
+  - .hgrc
 
 variables:
   separator: '[=:]'
