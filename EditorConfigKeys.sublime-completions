@@ -1,0 +1,14 @@
+{
+    "scope": "source.ini.editorconfig meta.mapping.key",
+    "completions":
+    [
+        { "trigger": "indent_style\tkey", "contents": "indent_style = ${0:tab}" },
+        { "trigger": "indent_size\tkey", "contents": "indent_size = ${0:4}" },
+        { "trigger": "tab_width\tkey", "contents": "tab_width = ${0:4}" },
+        { "trigger": "end_of_line\tkey", "contents": "end_of_line = ${0:lf}" },
+        { "trigger": "charset\tkey", "contents": "charset = ${0:utf-8}" },
+        { "trigger": "trim_trailing_whitespace\tkey", "contents": "trim_trailing_whitespace = ${0:true}" },
+        { "trigger": "insert_final_newline\tkey", "contents": "insert_final_newline = ${0:true}" },
+        { "trigger": "root\tkey", "contents": "root = ${0:true}" }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "scope": "source.ini.editorconfig meta.mapping.value",
+    "completions":
+    [
+        { "trigger": "true\tvalue", "contents": "true" },
+        { "trigger": "false\tvalue", "contents": "false" },
+        { "trigger": "tab\tvalue", "contents": "tab" },
+        { "trigger": "space\tvalue", "contents": "space" },
+        { "trigger": "lf\tvalue", "contents": "lf" },
+        { "trigger": "cr\tvalue", "contents": "cr" },
+        { "trigger": "crlf\tvalue", "contents": "crlf" },
+        { "trigger": "latin1\tvalue", "contents": "latin1" },
+        { "trigger": "utf-8\tvalue", "contents": "utf-8" },
+        { "trigger": "utf-8-bom\tvalue", "contents": "utf-8-bom" },
+        { "trigger": "utf-16be\tvalue", "contents": "utf-16be" },
+        { "trigger": "utf-16le\tvalue", "contents": "utf-16le" }
+    ]
+}
