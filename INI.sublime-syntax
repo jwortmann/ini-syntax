@@ -11,6 +11,8 @@ file_extensions:
   - ini
   - lng
   - url
+  - .buckconfig
+  - .flowconfig
   - .hgrc
 
 variables:
