@@ -8,8 +8,8 @@ A package for [Sublime Text](https://www.sublimetext.com/) that provides syntax 
 
 ## Installation
 
-1. Run `Package Control: Add Repository` from the command palette and paste `https://raw.githubusercontent.com/jwortmann/ini-syntax/master/packages.json`
-2. Run `Package Control: Install Package` and search for `INI Syntax`
+The color scheme can be installed via Sublime Text's package manager [Package Control](https://packagecontrol.io/installation).
+From the command palette choose `Package Control: Install Package` and search for `INI`.
 
 ## Features
 

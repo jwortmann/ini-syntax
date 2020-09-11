@@ -23,4 +23,4 @@ jobs:
       - uses: SublimeText/syntax-test-action@v1
         with:
           build: 'latest'
-          package_name: 'INI Syntax'
+          package_name: 'INI'
