@@ -8,7 +8,7 @@ A package for [Sublime Text](https://www.sublimetext.com/) that provides syntax 
 
 ## Installation
 
-The color scheme can be installed via Sublime Text's package manager [Package Control](https://packagecontrol.io/installation).
+The package can be installed via Sublime Text's package manager [Package Control](https://packagecontrol.io/installation).
 From the command palette choose `Package Control: Install Package` and search for `INI`.
 
 ## Features
