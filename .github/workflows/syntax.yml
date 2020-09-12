@@ -1,4 +1,4 @@
-name: syntax tests
+name: syntax test
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: SublimeText/syntax-test-action@v1
+      - uses: SublimeText/syntax-test-action@v2
         with:
           build: 'latest'
-          package_name: 'INI'
+          package_name: INI

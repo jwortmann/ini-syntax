@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/jwortmann/ini-syntax)](https://github.com/jwortmann/ini-syntax/blob/master/LICENSE)
 [![Version](https://img.shields.io/github/v/tag/jwortmann/ini-syntax?label=version)](https://github.com/jwortmann/ini-syntax/tags)
-[![GitHub Actions](https://github.com/jwortmann/ini-syntax/workflows/syntax%20tests/badge.svg)](https://github.com/jwortmann/ini-syntax/actions)
+[![GitHub Actions](https://github.com/jwortmann/ini-syntax/workflows/syntax%20test/badge.svg)](https://github.com/jwortmann/ini-syntax/actions)
 
 A package for [Sublime Text](https://www.sublimetext.com/) that provides syntax highlighting for INI and related file types like Windows Registry (.reg) files.
 
