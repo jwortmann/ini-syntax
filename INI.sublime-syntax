@@ -72,7 +72,7 @@ contexts:
         - match: (\[)(\d+)(\])
           captures:
             1: punctuation.section.brackets.begin.ini
-            2: constant.numeric.integer.decimal.ini
+            2: meta.number.integer.decimal.ini constant.numeric.value.ini
             3: punctuation.section.brackets.end.ini
         - match: \,
           scope: punctuation.separator.sequence.ini
@@ -167,16 +167,21 @@ contexts:
 
   hex-number:
     - match: \b\h+\b
-      scope: constant.numeric.integer.hexadecimal.ini
+      scope: meta.number.integer.hexadecimal.ini constant.numeric.value.ini
 
   number:
-    - match: '[-+]?\b\d*(\.)\d+(?:(?:E|e)[-+]?\d+)?(F|f)?\b'
-      scope: constant.numeric.float.decimal.ini
+    - match: '([-+])?\b(\d*(\.)\d+(?:(?:E|e)[-+]?\d+)?)(F|f)?\b'
+      scope: meta.number.float.decimal.ini
       captures:
-        1: punctuation.separator.decimal.ini
-        2: storage.type.numeric.ini
-    - match: '[-+]?\b\d+\b'
-      scope: constant.numeric.integer.decimal.ini
+        1: keyword.operator.arithmetic.ini
+        2: constant.numeric.value.ini
+        3: punctuation.separator.decimal.ini
+        4: constant.numeric.suffix.ini
+    - match: '([-+])?\b(\d+)\b'
+      scope: meta.number.integer.decimal.ini
+      captures:
+        1: keyword.operator.arithmetic.ini
+        2: constant.numeric.value.ini
 
   string:
     - match: \"
