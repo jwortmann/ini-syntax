@@ -51,7 +51,7 @@ contexts:
         - match: \.\.
           scope: punctuation.separator.range.ini
         - match: -?\d+
-          scope: constant.numeric.integer.decimal.ini
+          scope: meta.set.ini
         - include: eol-pop
 
   # https://editorconfig-specification.readthedocs.io/en/latest/#supported-pairs
