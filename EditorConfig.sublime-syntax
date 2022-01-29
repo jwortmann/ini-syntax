@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 # https://www.sublimetext.com/docs/syntax.html
-# https://editorconfig-specification.readthedocs.io/en/latest/#file-format
+# https://editorconfig-specification.readthedocs.io/#file-format
 name: EditorConfig
 scope: source.ini.editorconfig
 
@@ -29,7 +29,7 @@ contexts:
         - include: glob-expression
         - include: eol-pop
 
-  # https://editorconfig-specification.readthedocs.io/en/latest/#glob-expressions
+  # https://editorconfig-specification.readthedocs.io/#glob-expressions
   glob-expression:
     - match: '[*?]'
       scope: constant.character.wildcard.ini
@@ -50,11 +50,12 @@ contexts:
           scope: punctuation.separator.sequence.ini
         - match: \.\.
           scope: punctuation.separator.range.ini
-        - match: -?\d+
+        - match: -?\d+\b
           scope: constant.numeric.integer.decimal.ini
+        - match: \w+
         - include: eol-pop
 
-  # https://editorconfig-specification.readthedocs.io/en/latest/#supported-pairs
+  # https://editorconfig-specification.readthedocs.io/#supported-pairs
   mapping:
     - match: (?=\S)
       push:
