@@ -50,9 +50,6 @@ contexts:
           scope: punctuation.separator.sequence.ini
         - match: \.\.
           scope: punctuation.separator.range.ini
-        - match: -?\d+\b
-          scope: constant.numeric.integer.decimal.ini
-        - match: \w+
         - include: eol-pop
 
   # https://editorconfig-specification.readthedocs.io/#supported-pairs
