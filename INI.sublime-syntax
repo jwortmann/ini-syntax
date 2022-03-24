@@ -81,7 +81,7 @@ contexts:
 
   mapping-separator:
     - match: '{{separator}}'
-      scope: punctuation.separator.mapping.key-value.ini
+      scope: punctuation.separator.key-value.ini
       pop: true
 
   mapping-value:
