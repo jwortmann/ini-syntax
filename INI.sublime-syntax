@@ -50,8 +50,11 @@ contexts:
 
   section-name:
     - meta_content_scope: meta.section.ini entity.name.section.ini
-    - match: \]
-      scope: meta.section.ini punctuation.definition.section.end.ini
+    - match: (\])(\s*$)?
+      scope: meta.section.ini
+      captures:
+        1: punctuation.definition.section.end.ini
+        2: meta.whitespace.newline.ini
       pop: true
     - match: \.
       scope: punctuation.separator.namespace.ini
