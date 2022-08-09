@@ -10,7 +10,7 @@ file_extensions:
 
 contexts:
   main:
-    - include: INI.sublime-syntax#comment
+    - include: Packages/INI/INI.sublime-syntax#comment
     - include: section
     - include: mapping
 
@@ -62,7 +62,7 @@ contexts:
             - - meta_content_scope: meta.mapping.ini
               - match: (?=\S)
                 set:
-                  - INI.sublime-syntax#mapping-value-meta
+                  - Packages/INI/INI.sublime-syntax#mapping-value-meta
                   - mapping-value
               - include: eol-pop
             - - match: =
@@ -70,7 +70,7 @@ contexts:
                 pop: true
         - match: \b(?:indent_style|indent_size|tab_width|end_of_line|charset|trim_trailing_whitespace|insert_final_newline|root)\b
           scope: variable.language.ini
-        - include: INI.sublime-syntax#string
+        - include: Packages/INI/INI.sublime-syntax#string
         - include: eol-pop
 
   mapping-value:
@@ -78,8 +78,8 @@ contexts:
       scope: support.constant.ini
     - match: \b(?i:true|false)\b
       scope: constant.language.ini
-    - include: INI.sublime-syntax#number
-    - include: INI.sublime-syntax#string
+    - include: Packages/INI/INI.sublime-syntax#number
+    - include: Packages/INI/INI.sublime-syntax#string
     - include: eol-pop
 
   eol-pop:
