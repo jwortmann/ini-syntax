@@ -8,10 +8,17 @@ file_extensions:
 
 contexts:
   main:
-    - match: (?:REGEDIT4|Windows Registry Editor Version 5\.00)\b
-      scope: meta.directive.registry.ini keyword.other.directive.registry.ini
-      set:
-        - include: INI.sublime-syntax
-    - match: ^|(?=\S)
-      set:
-        - include: INI.sublime-syntax
+    - match: ''
+      push:
+        - meta_scope: meta.directive.registry.ini
+        - match: ^(?:REGEDIT4|Windows Registry Editor Version 5\.00)\b
+          scope: keyword.other.directive.registry.ini
+          set: content
+        - match: \n
+          set: content
+        - match: (?=;)
+          set: content
+        - include: content
+
+  content:
+    - include: Packages/INI/INI.sublime-syntax

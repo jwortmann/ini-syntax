@@ -1,0 +1,29 @@
+{
+    "scope": "source.reg meta.section - meta.whitespace",
+    "completions": [
+        {
+            "trigger": "HKCR",
+            "contents": "HKEY_CLASSES_ROOT",
+            "annotation": "HKEY_CLASSES_ROOT",
+            "kind": ["namespace", "h", "Registry Hive"]
+        },
+        {
+            "trigger": "HKCU",
+            "contents": "HKEY_CURRENT_USER",
+            "annotation": "HKEY_CURRENT_USER",
+            "kind": ["namespace", "h", "Registry Hive"]
+        },
+        {
+            "trigger": "HKLM",
+            "contents": "HKEY_LOCAL_MACHINE",
+            "annotation": "HKEY_LOCAL_MACHINE",
+            "kind": ["namespace", "h", "Registry Hive"]
+        },
+        {
+            "trigger": "HKCC",
+            "contents": "HKEY_CURRENT_CONFIG",
+            "annotation": "HKEY_CURRENT_CONFIG",
+            "kind": ["namespace", "h", "Registry Hive"]
+        }
+    ]
+}

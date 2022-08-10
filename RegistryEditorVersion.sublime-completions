@@ -1,0 +1,10 @@
+{
+    "scope": "source.reg meta.directive.registry",
+    "completions": [
+        {
+            "trigger": "Windows Registry Editor Version 5.00",
+            "contents": "Windows Registry Editor Version 5.00",
+            "kind": "ambiguous"
+        }
+    ]
+}
