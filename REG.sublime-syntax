@@ -14,7 +14,9 @@ contexts:
         - match: ^(?:REGEDIT4|Windows Registry Editor Version 5\.00)\b
           scope: keyword.other.directive.registry.ini
           set: content
-        - match: (?=;|\n)
+        - match: \n
+          set: content
+        - match: (?=;)
           set: content
         - include: content
 
