@@ -40,8 +40,9 @@ contexts:
           pop: true
 
   section:
-    - match: \[
-      scope: punctuation.definition.section.begin.ini
+    - match: ^\s*(\[)
+      captures:
+        1: punctuation.definition.section.begin.ini
       push:
         - meta_scope: meta.section.ini
         - match: \-?
