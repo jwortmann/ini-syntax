@@ -37,7 +37,7 @@ For example, if you want keys to be highlighted with the same color as keywords 
 ### Comment toggling
 
 The default character used by the "toggle comment" functionality (<kbd>Ctrl</kbd>+<kbd>/</kbd>) in INI files is a semicolon.
-If you prefer to use `#` instead, you can achieve that by adding a custom key binding (this requires Sublime Text build 4130 or later):
+If you prefer to use `#` instead, you can achieve that by adding a custom key binding with a `"variant": 2` argument for the `toggle_comment` command (this requires Sublime Text build 4130 or later):
 ```json
 {
     "keys": ["ctrl+/"],
