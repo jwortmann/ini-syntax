@@ -1,19 +1,34 @@
 %YAML 1.2
 ---
 # http://www.sublimetext.com/docs/syntax.html
+# https://en.wikipedia.org/wiki/INI_file
 name: INI
 scope: source.ini
 
 file_extensions:
+  - ini
   - cfg
   - conf
+
+hidden_file_extensions:
+  - avpreset
+  - desktop
+  - ffpreset
   - inf
-  - ini
+  - lektorproject
   - lng
+  - pycodestyle
+  - pylintrc
   - url
+  - vlcrc
   - .buckconfig
+  - .coveragerc
+  - .flake8
   - .flowconfig
   - .hgrc
+  - .pycodestyle
+  - .pylintrc
+  - .style.yapf
 
 variables:
   separator: '[=:]'
