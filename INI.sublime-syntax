@@ -146,8 +146,10 @@ contexts:
     - include: string
 
   constant:
-    - match: \b(?i:true|false)\b
-      scope: constant.language.ini
+    - match: \b(?i:true)\b
+      scope: constant.language.boolean.true.ini
+    - match: \b(?i:false)\b
+      scope: constant.language.boolean.false.ini
     - match: \bdword\b
       scope: storage.type.dword.ini
       set:
