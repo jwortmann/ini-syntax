@@ -23,6 +23,7 @@ hidden_file_extensions:
   - vlcrc
   - .buckconfig
   - .coveragerc
+  - .editorconfig
   - .flake8
   - .flowconfig
   - .hgrc
