@@ -3,6 +3,8 @@
 name: REG
 scope: source.reg
 
+first_line_match: ^(?:REGEDIT4|Windows Registry Editor Version 5\.00)\b
+
 file_extensions:
   - reg
 
